@@ -1,0 +1,14 @@
+{
+  "name": "@common-module/wallet-login",
+  "author": "yj.gaia",
+  "homepage": "https://personas.gaia.cc/yj.gaia",
+  "version": "0.2.3",
+  "type": "module",
+  "types": "./lib/index.d.ts",
+  "main": "./lib/index.js",
+  "dependencies": {
+    "@common-module/supabase": "^0.1.7",
+    "@common-module/wallet": "^0.2.3"
+  },
+  "devDependencies": {}
+}

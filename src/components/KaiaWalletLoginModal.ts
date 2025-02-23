@@ -7,7 +7,7 @@ import {
 } from "@common-module/app-components";
 import { WalletButtonGroup, WalletConnector } from "@common-module/wallet";
 import { createSiweMessage } from "viem/siwe";
-import WalletLoginConfig from "../WalletLoginConfig.js";
+import WalletLoginConfig from "../KaiaWalletLoginConfig.js";
 
 interface LoginResult {
   walletId: string;
@@ -15,7 +15,7 @@ interface LoginResult {
   token: string;
 }
 
-export default class WalletLoginModal extends StructuredModal {
+export default class KaiaWalletLoginModal extends StructuredModal {
   private resolveLogin?: (result: LoginResult) => void;
   private rejectLogin?: (reason: Error) => void;
 

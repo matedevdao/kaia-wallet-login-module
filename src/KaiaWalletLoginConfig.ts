@@ -1,8 +1,16 @@
+import { I18nMessageManager } from "@common-module/app";
 import { SupabaseConnector } from "@common-module/supabase";
 import {
   IKaiaWalletModuleConfig,
   KaiaWalletModuleConfig,
 } from "kaia-wallet-module";
+import messages_en from "../locales/en.yml";
+import messages_ko from "../locales/ko.yml";
+
+I18nMessageManager.addMessagesBulk({
+  en: messages_en,
+  ko: messages_ko,
+});
 
 class KaiaWalletLoginConfig {
   public messageForWalletLogin = "Login with Crypto Wallet";

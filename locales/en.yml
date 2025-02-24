@@ -1,21 +1,21 @@
-login_dialog:
+login_kaia_wallet_modal:
   title: "Login Required"
   message: "You need to log in with your wallet to execute this transaction. Would you like to log in now?"
   button:
     confirm: "Log in"
 
-wallet_mismatch_dialog:
+kaia_wallet_mismatch_dialog:
   title: "Wallet Address Mismatch"
   message: "Your current wallet address (%{currentAddress}) differs from the logged-in wallet address (%{requiredAddress}). Would you like to log in again with the correct wallet?"
   button:
     confirm: "Log in Again"
 
-wallet_login_modal:
+kaia_wallet_login_modal:
   title: "Login with Crypto Wallet"
   button:
     cancel: "Cancel"
 
-sign_message_dialog:
+kaia_sign_message_dialog:
   title: "Sign Message"
   message: "To complete the login process, please sign the message in your wallet. This signature verifies your ownership of the wallet address."
   info_alert: "No gas fees will be charged for this signature request."

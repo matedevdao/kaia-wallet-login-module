@@ -4,9 +4,9 @@ import type { Abi, ContractFunctionArgs, ContractFunctionName } from "viem";
 declare class KaiaWalletLoginManager extends AuthTokenManager<{
     loginStatusChanged: (loggedIn: boolean) => void;
 }> {
-    getLoggedInWallet(): string | undefined;
-    getLoggedInAddress(): `0x${string}` | undefined;
-    getLoggedInUser(): `0x${string}` | undefined;
+    getLoggedInWallet(): any;
+    getLoggedInAddress(): any;
+    getLoggedInUser(): any;
     isLoggedIn(): boolean;
     constructor();
     login(): Promise<`0x${string}`>;

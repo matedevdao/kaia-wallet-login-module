@@ -1,4 +1,4 @@
-import { el } from "@common-module/app";
+import { el, msg } from "@common-module/app";
 import {
   Button,
   ConfirmDialog,
@@ -21,7 +21,7 @@ export default class KaiaWalletLoginModal extends StructuredModal {
   private rejectLogin?: (reason: Error) => void;
 
   constructor() {
-    super(".wallet-login-modal", false);
+    super(".kaia-wallet-login-modal", false);
 
     this.appendToHeader(el("h1", "Login with Crypto Wallet"));
     this.appendToMain(
@@ -57,15 +57,13 @@ export default class KaiaWalletLoginModal extends StructuredModal {
         },
       );
 
-    await new ConfirmDialog(".sign-message", {
-      title: "Sign Message",
+    await new ConfirmDialog(".kaia-sign-message", {
+      title: msg("kaia_sign_message_dialog.title"),
       message: [
-        "To complete the login process, please sign the message in your wallet. This signature verifies your ownership of the wallet address.",
-        new InfoAlert(
-          "No gas fees will be charged for this signature request.",
-        ),
+        msg("kaia_sign_message_dialog.message"),
+        new InfoAlert(msg("kaia_sign_message_dialog.info_alert")),
       ],
-      confirmButtonTitle: "Sign Message",
+      confirmButtonTitle: msg("kaia_sign_message_dialog.button.confirm"),
     }).waitForConfirmation();
 
     const message = createSiweMessage({

@@ -1,21 +1,21 @@
-login_dialog:
+login_kaia_wallet_modal:
   title: "로그인 필요"
   message: "이 거래를 실행하려면 지갑으로 로그인해야 합니다. 지금 로그인하시겠습니까?"
   button:
     confirm: "로그인"
 
-wallet_mismatch_dialog:
+kaia_wallet_mismatch_dialog:
   title: "지갑 주소 불일치"
   message: "현재 지갑 주소(%{currentAddress})가 로그인된 지갑 주소(%{requiredAddress})와 다릅니다. 올바른 지갑으로 다시 로그인하시겠습니까?"
   button:
     confirm: "다시 로그인"
 
-wallet_login_modal:
+kaia_wallet_login_modal:
   title: "암호화폐 지갑으로 로그인"
   button:
     cancel: "취소"
 
-sign_message_dialog:
+kaia_sign_message_dialog:
   title: "메시지 서명"
   message: "로그인을 완료하려면 지갑에서 메시지에 서명하세요. 이 서명은 지갑 주소의 소유권을 확인합니다."
   info_alert: "이 서명 요청에는 가스 수수료가 부과되지 않습니다."

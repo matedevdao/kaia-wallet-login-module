@@ -1,19 +1,9 @@
 import { AppCompConfig, ConfirmDialog } from "@common-module/app-components";
 import { AuthTokenManager } from "@common-module/supabase";
-import { WalletSessionManager } from "@common-module/wallet";
-import {
-  Config,
-  EstimateGasParameters,
-  ReadContractParameters,
-  WriteContractParameters,
-} from "@wagmi/core";
-import type {
-  Abi,
-  ContractFunctionArgs,
-  ContractFunctionName,
-  DecodeEventLogReturnType,
-} from "viem";
-import WalletLoginModal from "./components/WalletLoginModal.js";
+import { Config, WriteContractParameters } from "@wagmi/core";
+import { KaiaWalletSessionManager } from "kaia-wallet-module";
+import type { Abi, ContractFunctionArgs, ContractFunctionName } from "viem";
+import KaiaWalletLoginModal from "./components/KaiaWalletLoginModal.js";
 
 class KaiaWalletLoginManager extends AuthTokenManager<{
   loginStatusChanged: (loggedIn: boolean) => void;
@@ -39,10 +29,10 @@ class KaiaWalletLoginManager extends AuthTokenManager<{
   public async login() {
     this.logout();
 
-    const { walletId, walletAddress, token } = await new WalletLoginModal()
+    const { walletId, walletAddress, token } = await new KaiaWalletLoginModal()
       .waitForLogin();
 
-    WalletSessionManager.setConnectedWalletInfo(walletId, walletAddress);
+    KaiaWalletSessionManager.setConnectedWalletInfo(walletId, walletAddress);
 
     const currentIsLoggedIn = this.isLoggedIn();
 
@@ -58,7 +48,7 @@ class KaiaWalletLoginManager extends AuthTokenManager<{
   }
 
   public logout() {
-    WalletSessionManager.disconnect();
+    KaiaWalletSessionManager.disconnect();
 
     const currentIsLoggedIn = this.isLoggedIn();
 
@@ -69,26 +59,6 @@ class KaiaWalletLoginManager extends AuthTokenManager<{
     if (currentIsLoggedIn !== this.isLoggedIn()) {
       this.emit("loginStatusChanged", this.isLoggedIn());
     }
-  }
-
-  public async getBalance(chainId: number) {
-    const walletAddress = this.getLoggedInAddress();
-    if (!walletAddress) throw new Error("Not logged in");
-    await WalletSessionManager.getBalance(chainId, walletAddress);
-  }
-
-  public async readContract<
-    const abi extends Abi | readonly unknown[],
-    functionName extends ContractFunctionName<abi, "pure" | "view">,
-    args extends ContractFunctionArgs<abi, "pure" | "view", functionName>,
-  >(parameters: ReadContractParameters<abi, functionName, args, Config>) {
-    return await WalletSessionManager.readContract(parameters as any);
-  }
-
-  public async estimateGas<chainId extends Config["chains"][number]["id"]>(
-    parameters: EstimateGasParameters<Config, chainId>,
-  ) {
-    return await WalletSessionManager.estimateGas(parameters as any);
   }
 
   public async writeContract<
@@ -108,21 +78,22 @@ class KaiaWalletLoginManager extends AuthTokenManager<{
       Config,
       chainId
     >,
-  ): Promise<DecodeEventLogReturnType[]> {
+  ): Promise<void> {
     if (!this.getLoggedInAddress() || !this.getLoggedInWallet()) {
       this.showLoginDialog();
       throw new Error("Not logged in");
     }
 
     if (
-      WalletSessionManager.getConnectedAddress() &&
-      WalletSessionManager.getConnectedAddress() !== this.getLoggedInAddress()
+      KaiaWalletSessionManager.getConnectedAddress() &&
+      KaiaWalletSessionManager.getConnectedAddress() !==
+        this.getLoggedInAddress()
     ) {
       this.showWalletMismatchDialog();
       throw new Error("Wallet address mismatch");
     }
 
-    return await WalletSessionManager.writeContract(parameters as any);
+    await KaiaWalletSessionManager.writeContract(parameters as any);
   }
 
   private showLoginDialog() {
@@ -139,7 +110,7 @@ class KaiaWalletLoginManager extends AuthTokenManager<{
   }
 
   private showWalletMismatchDialog() {
-    const currentWalletAddress = WalletSessionManager.getConnectedAddress();
+    const currentWalletAddress = KaiaWalletSessionManager.getConnectedAddress();
     const requiredWalletAddress = this.getLoggedInAddress();
 
     new ConfirmDialog(".wallet-mismatch", {

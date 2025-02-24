@@ -5,7 +5,8 @@ import {
   InfoAlert,
   StructuredModal,
 } from "@common-module/app-components";
-import { WalletButtonGroup, WalletConnector } from "@common-module/wallet";
+import { KaiaWalletButtonGroup } from "kaia-wallet-module";
+import WalletForKaiaConnector from "kaia-wallet-module/lib/wallet-connectors/WalletForKaiaConnector.js";
 import { createSiweMessage } from "viem/siwe";
 import WalletLoginConfig from "../KaiaWalletLoginConfig.js";
 
@@ -24,7 +25,7 @@ export default class KaiaWalletLoginModal extends StructuredModal {
 
     this.appendToHeader(el("h1", "Login with Crypto Wallet"));
     this.appendToMain(
-      new WalletButtonGroup(
+      new KaiaWalletButtonGroup(
         "Login",
         (walletConnector) => this.handleLogin(walletConnector),
       ),
@@ -42,9 +43,8 @@ export default class KaiaWalletLoginModal extends StructuredModal {
     );
   }
 
-  private async handleLogin(walletConnector: WalletConnector) {
-    const result = await walletConnector.connect();
-    const walletAddress = result.accounts[0];
+  private async handleLogin(walletConnector: WalletForKaiaConnector) {
+    const walletAddress = await walletConnector.connect();
     if (!walletAddress) throw new Error("No accounts found");
 
     const { nonce, issuedAt } = await WalletLoginConfig.supabaseConnector

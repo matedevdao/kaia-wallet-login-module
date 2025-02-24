@@ -1,5 +1,8 @@
 import { SupabaseConnector } from "@common-module/supabase";
-import { IWalletModuleConfig, WalletModuleConfig } from "@common-module/wallet";
+import {
+  IKaiaWalletModuleConfig,
+  KaiaWalletModuleConfig,
+} from "kaia-wallet-module";
 
 class KaiaWalletLoginConfig {
   public messageForWalletLogin = "Login with Crypto Wallet";
@@ -15,11 +18,11 @@ class KaiaWalletLoginConfig {
   }
 
   public init(
-    options: IWalletModuleConfig & { supabaseConnector: SupabaseConnector },
+    options: IKaiaWalletModuleConfig & { supabaseConnector: SupabaseConnector },
   ) {
     this.supabaseConnector = options.supabaseConnector;
 
-    WalletModuleConfig.init(options);
+    KaiaWalletModuleConfig.init(options);
   }
 }
 

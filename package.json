@@ -6,6 +6,9 @@
   "type": "module",
   "types": "./lib/index.d.ts",
   "main": "./lib/index.js",
-  "dependencies": {},
+  "dependencies": {
+    "@common-module/supabase": "^0.1.7",
+    "kaia-wallet-module": "^0.0.2"
+  },
   "devDependencies": {}
 }

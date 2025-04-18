@@ -1,6 +1,5 @@
-import { msg } from "@common-module/app";
-import { AppCompConfig, ConfirmDialog } from "@common-module/app-components";
-import { AuthTokenManager } from "@common-module/supabase";
+import { AuthTokenManager, msg } from "@commonmodule/app";
+import { AppCompConfig, ConfirmDialog } from "@commonmodule/app-components";
 import { Config, WriteContractParameters } from "@wagmi/core";
 import { KaiaWalletSessionManager } from "kaia-wallet-module";
 import type { Abi, ContractFunctionArgs, ContractFunctionName } from "viem";
@@ -118,7 +117,7 @@ class KaiaWalletLoginManager extends AuthTokenManager<{
       title: msg("kaia_wallet_mismatch_dialog.title"),
       message: msg("kaia_wallet_mismatch_dialog.message", {
         currentAddress: currentWalletAddress ?? "Unknown",
-        requiredAddress: requiredWalletAddress,
+        requiredAddress: requiredWalletAddress as string,
       }),
       confirmButtonTitle: msg("kaia_wallet_mismatch_dialog.button.confirm"),
       onConfirm: () => {

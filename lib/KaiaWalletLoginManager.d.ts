@@ -1,12 +1,12 @@
-import { AuthTokenManager } from "@common-module/supabase";
+import { AuthTokenManager } from "@commonmodule/app";
 import { Config, WriteContractParameters } from "@wagmi/core";
 import type { Abi, ContractFunctionArgs, ContractFunctionName } from "viem";
 declare class KaiaWalletLoginManager extends AuthTokenManager<{
     loginStatusChanged: (loggedIn: boolean) => void;
 }> {
-    getLoggedInWallet(): any;
-    getLoggedInAddress(): any;
-    getLoggedInUser(): any;
+    getLoggedInWallet(): string | undefined;
+    getLoggedInAddress(): `0x${string}` | undefined;
+    getLoggedInUser(): `0x${string}` | undefined;
     isLoggedIn(): boolean;
     constructor();
     login(): Promise<`0x${string}`>;

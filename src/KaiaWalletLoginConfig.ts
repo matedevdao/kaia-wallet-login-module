@@ -1,5 +1,5 @@
-import { I18nMessageManager } from "@common-module/app";
-import { SupabaseConnector } from "@common-module/supabase";
+import { I18nMessageManager } from "@commonmodule/app";
+import { SupabaseConnector } from "@commonmodule/supabase";
 import {
   IKaiaWalletModuleConfig,
   KaiaWalletModuleConfig,

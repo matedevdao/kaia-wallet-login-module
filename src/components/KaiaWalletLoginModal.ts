@@ -1,10 +1,10 @@
-import { el, msg } from "@common-module/app";
+import { el, msg } from "@commonmodule/app";
 import {
   Button,
   ConfirmDialog,
   InfoAlert,
   StructuredModal,
-} from "@common-module/app-components";
+} from "@commonmodule/app-components";
 import { KaiaWalletButtonGroup } from "kaia-wallet-module";
 import WalletForKaiaConnector from "kaia-wallet-module/lib/wallet-connectors/WalletForKaiaConnector.js";
 import { createSiweMessage } from "viem/siwe";

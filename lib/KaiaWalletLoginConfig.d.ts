@@ -1,4 +1,4 @@
-import { SupabaseConnector } from "@common-module/supabase";
+import { SupabaseConnector } from "@commonmodule/supabase";
 import { IKaiaWalletModuleConfig } from "kaia-wallet-module";
 declare class KaiaWalletLoginConfig {
     messageForWalletLogin: string;

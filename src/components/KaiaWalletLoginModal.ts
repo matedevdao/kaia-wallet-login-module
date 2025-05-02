@@ -8,6 +8,7 @@ import {
 import { KaiaWalletButtonGroup } from "kaia-wallet-module";
 import WalletForKaiaConnector from "kaia-wallet-module/lib/wallet-connectors/WalletForKaiaConnector.js";
 import { createSiweMessage } from "viem/siwe";
+import KaiaWalletAPIService from "../KaiaWalletAPIService.js";
 import WalletLoginConfig from "../KaiaWalletLoginConfig.js";
 
 interface LoginResult {
@@ -47,15 +48,8 @@ export default class KaiaWalletLoginModal extends StructuredModal {
     const walletAddress = await walletConnector.connect();
     if (!walletAddress) throw new Error("No accounts found");
 
-    const { nonce, issuedAt } = await WalletLoginConfig.supabaseConnector
-      .callEdgeFunction<{ nonce: string; issuedAt: string }>(
-        "generate-wallet-login-nonce",
-        {
-          walletAddress,
-          domain: window.location.host,
-          uri: window.location.origin,
-        },
-      );
+    const { nonce, issuedAt } = await KaiaWalletAPIService
+      .generateWalletLoginNonce(walletAddress);
 
     await new ConfirmDialog(".kaia-sign-message", {
       title: msg("kaia_sign_message_dialog.title"),
@@ -82,9 +76,10 @@ export default class KaiaWalletLoginModal extends StructuredModal {
       message,
     );
 
-    const token = await WalletLoginConfig.supabaseConnector.callEdgeFunction<
-      string
-    >("wallet-login", { walletAddress, signedMessage });
+    const token = await KaiaWalletAPIService.walletLogin(
+      walletAddress,
+      signedMessage,
+    );
 
     await WalletLoginConfig.executeAfterLogin(token);
 

@@ -1,5 +1,4 @@
 import { I18nMessageManager } from "@commonmodule/app";
-import { SupabaseConnector } from "@commonmodule/supabase";
 import {
   IKaiaWalletModuleConfig,
   KaiaWalletModuleConfig,
@@ -16,20 +15,17 @@ class KaiaWalletLoginConfig {
   public messageForWalletLogin = "Login with Crypto Wallet";
   public executeAfterLogin = async (token: string) => {};
 
-  private _supabaesConnector: SupabaseConnector | undefined;
-  public get supabaseConnector() {
-    if (!this._supabaesConnector) throw new Error("Supabase connector not set");
-    return this._supabaesConnector;
+  private _apiBaseURL: string | undefined;
+  public get apiBaseURL() {
+    if (!this._apiBaseURL) throw new Error("API base URL is not set");
+    return this._apiBaseURL;
   }
-  public set supabaseConnector(connector: SupabaseConnector) {
-    this._supabaesConnector = connector;
+  public set apiBaseURL(url: string) {
+    this._apiBaseURL = url;
   }
 
-  public init(
-    options: IKaiaWalletModuleConfig & { supabaseConnector: SupabaseConnector },
-  ) {
-    this.supabaseConnector = options.supabaseConnector;
-
+  public init(options: IKaiaWalletModuleConfig & { apiBaseURL: string }) {
+    this.apiBaseURL = options.apiBaseURL;
     KaiaWalletModuleConfig.init(options);
   }
 }

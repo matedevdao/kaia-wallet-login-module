@@ -1,13 +1,12 @@
-import { SupabaseConnector } from "@commonmodule/supabase";
 import { IKaiaWalletModuleConfig } from "kaia-wallet-module";
 declare class KaiaWalletLoginConfig {
     messageForWalletLogin: string;
     executeAfterLogin: (token: string) => Promise<void>;
-    private _supabaesConnector;
-    get supabaseConnector(): SupabaseConnector;
-    set supabaseConnector(connector: SupabaseConnector);
+    private _apiBaseURL;
+    get apiBaseURL(): string;
+    set apiBaseURL(url: string);
     init(options: IKaiaWalletModuleConfig & {
-        supabaseConnector: SupabaseConnector;
+        apiBaseURL: string;
     }): void;
 }
 declare const _default: KaiaWalletLoginConfig;

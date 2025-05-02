@@ -13,6 +13,7 @@ kaia_wallet_mismatch_dialog:
 kaia_wallet_login_modal:
   title: "암호화폐 지갑으로 로그인"
   button:
+    login: "로그인"
     cancel: "취소"
 
 kaia_sign_message_dialog:

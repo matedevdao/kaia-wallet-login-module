@@ -23,10 +23,10 @@ export default class KaiaWalletLoginModal extends StructuredModal {
   constructor() {
     super(".kaia-wallet-login-modal", false);
 
-    this.appendToHeader(el("h1", "Login with Crypto Wallet"));
+    this.appendToHeader(el("h1", msg("kaia_wallet_login_modal.title")));
     this.appendToMain(
       new KaiaWalletButtonGroup(
-        "Login",
+        msg("kaia_wallet_login_modal.button.login"),
         (walletConnector) => this.handleLogin(walletConnector),
       ),
     );

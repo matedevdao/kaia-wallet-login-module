@@ -13,6 +13,7 @@ kaia_wallet_mismatch_dialog:
 kaia_wallet_login_modal:
   title: "Login with Crypto Wallet"
   button:
+    login: "Log in"
     cancel: "Cancel"
 
 kaia_sign_message_dialog:

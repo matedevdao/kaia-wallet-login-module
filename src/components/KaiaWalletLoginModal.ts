@@ -58,6 +58,7 @@ export default class KaiaWalletLoginModal extends StructuredModal {
         new InfoAlert(msg("kaia_sign_message_dialog.info_alert")),
       ],
       confirmButtonTitle: msg("kaia_sign_message_dialog.button.confirm"),
+      cancelButtonTitle: msg("kaia_sign_message_dialog.button.cancel"),
     }).waitForConfirmation();
 
     const message = createSiweMessage({

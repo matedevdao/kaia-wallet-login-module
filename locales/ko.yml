@@ -22,3 +22,4 @@ kaia_sign_message_dialog:
   info_alert: "이 서명 요청에는 가스 수수료가 부과되지 않습니다."
   button:
     confirm: "메시지 서명"
+    cancel: "취소"

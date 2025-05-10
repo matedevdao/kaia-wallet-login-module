@@ -2,12 +2,12 @@
   "name": "kaia-wallet-login-module",
   "author": "matedevdao",
   "homepage": "https://matedevdao.github.io",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "type": "module",
   "types": "./lib/index.d.ts",
   "main": "./lib/index.js",
   "dependencies": {
-    "kaia-wallet-module": "^0.0.3"
+    "kaia-wallet-module": "^0.0.4"
   },
   "devDependencies": {}
 }

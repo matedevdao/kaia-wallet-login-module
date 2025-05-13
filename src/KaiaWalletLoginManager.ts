@@ -4,6 +4,7 @@ import { Config, WriteContractParameters } from "@wagmi/core";
 import { KaiaWalletSessionManager } from "kaia-wallet-module";
 import type { Abi, ContractFunctionArgs, ContractFunctionName } from "viem";
 import KaiaWalletLoginModal from "./components/KaiaWalletLoginModal.js";
+import KaiaWalletAPIService from "./KaiaWalletAPIService.js";
 
 class KaiaWalletLoginManager extends AuthTokenManager<{
   loginStatusChanged: (loggedIn: boolean) => void;
@@ -47,14 +48,23 @@ class KaiaWalletLoginManager extends AuthTokenManager<{
     return walletAddress;
   }
 
-  public logout() {
+  public async logout() {
     KaiaWalletSessionManager.disconnect();
 
     const currentIsLoggedIn = this.isLoggedIn();
+    const currentWalletAddress = this.getLoggedInAddress();
+    const currentToken = this.token;
 
     this.token = undefined;
     this.store.remove("loggedInWallet");
     this.store.remove("loggedInAddress");
+
+    if (currentWalletAddress && currentToken) {
+      await KaiaWalletAPIService.walletLogout(
+        currentWalletAddress,
+        currentToken,
+      );
+    }
 
     if (currentIsLoggedIn !== this.isLoggedIn()) {
       this.emit("loginStatusChanged", this.isLoggedIn());

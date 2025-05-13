@@ -10,7 +10,7 @@ declare class KaiaWalletLoginManager extends AuthTokenManager<{
     isLoggedIn(): boolean;
     constructor();
     login(): Promise<`0x${string}`>;
-    logout(): void;
+    logout(): Promise<void>;
     writeContract<const abi extends Abi | readonly unknown[], functionName extends ContractFunctionName<abi, "nonpayable" | "payable">, args extends ContractFunctionArgs<abi, "nonpayable" | "payable", functionName>, chainId extends Config["chains"][number]["id"]>(parameters: WriteContractParameters<abi, functionName, args, Config, chainId>): Promise<void>;
     private showLoginDialog;
     private showWalletMismatchDialog;

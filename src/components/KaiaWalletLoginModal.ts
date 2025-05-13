@@ -34,7 +34,7 @@ export default class KaiaWalletLoginModal extends StructuredModal {
     this.appendToFooter(
       new Button(".cancel", {
         title: "Cancel",
-        onClick: () => this.remove(),
+        onPress: () => this.remove(),
       }),
     );
 

@@ -4,6 +4,6 @@ export default class KaiaWalletAPIService {
         issuedAt: string;
     }>;
     static walletLogin(walletAddress: string, signedMessage: string): Promise<string>;
-    static walletLogout(walletAddress: string, token: string): Promise<void>;
+    static walletLogout(): Promise<void>;
 }
 //# sourceMappingURL=KaiaWalletAPIService.d.ts.map
